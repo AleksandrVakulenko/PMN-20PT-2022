@@ -4,7 +4,7 @@ addpath('include');
 
 
 folder = "Output 2022_10_06/";
-disp('nyan')
+disp('nya')
 
 Sample.H = 85e-6; %m
 Sample.S = 0.29/1000^2; %m^2
