@@ -1,6 +1,6 @@
 
 
-file_number = 100;
+file_number = 300;
 folder = "Output 2022_10_06/";
 
 Sample.H = 85e-6; %m
@@ -17,6 +17,8 @@ for i = 1:35
         file_addr = [char(folder) filename];
         Input_data = Read_file(file_addr);
     end
+    
+    
     
     Data(i) = Unpack_data(Input_data, Sample);
 end
@@ -41,9 +43,8 @@ end
 
 
 figure
-plot(Ps(2:end)/max(Ps(2:end)))
-ylim([0 1])
-set(gca, 'fontsize', 14)
+plot(Ps(2:end))
+ylim([0 3])
 
 
 

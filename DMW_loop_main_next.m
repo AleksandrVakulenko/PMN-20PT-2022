@@ -5,7 +5,7 @@ addpath('include');
 
 folder = "Output 2022_10_06/";
 
-% % PMN-20PT
+% PMN-20PT
 % Sample.H = 85e-6; %m
 % Sample.S = 0.29/1000^2; %m^2
 % Sample.Gain = 20;
@@ -25,8 +25,6 @@ Freq_out = [];
 Span_out = [];
 Coercive_p_out = [];
 Coercive_n_out = [];
-Eps_out = [];
-Res_out = [];
 k = 0;
 for file_number = 430:448%20:38%[17 16 15 14 13 12 6 7 8 9 10 11]
     feloop = open_dwm_fe_loop(Sample, folder, file_number, 'align');
@@ -46,7 +44,6 @@ for file_number = 430:448%20:38%[17 16 15 14 13 12 6 7 8 9 10 11]
     Span_out(k) = (Span.p + Span.n)/2;
     Coercive_p_out(k) = Coercive.p;
     Coercive_n_out(k) = Coercive.n;
-    [Eps_out(k), ~, Res_out(k)] = find_eps(feloop);
     
     
     [Field, Current] = Get_current(feloop);
@@ -95,8 +92,6 @@ end
 clearvars E P Span Coercive max_file_number
 clearvars pic_folder pic_filename k file_number folder
 
-%%
-load('out_data2.mat')
 
 %%
 
@@ -130,26 +125,6 @@ ylim([0 4])
 legend({'Positive', 'Negative'})
 
 
-subplot(3,1,3)
-plot(Temp_out, Eps_out, '-b', 'linewidth', 1.5)
-% errorbar(Temp_out, Eps_out, Eps_err, '-b', 'linewidth', 1.5)
-xlabel('Temp, C')
-ylabel('|eps|')
-title('Permittivity')
-grid on
-% xlim([20 130])
-ylim([200 1800])
-
-figure
-plot(Temp_out, log10(Res_out), '-b', 'linewidth', 1.5)
-xlabel('Temp, C')
-ylabel('R, Ohm')
-title('--')
-grid on
-% xlim([20 130])
-% ylim([200 1800])
-
-
 %%
 
 figure('position', [520 139 745 802])
@@ -178,61 +153,6 @@ xlim([20 130])
 ylim([0 10])
 
 legend({'Ec^+', 'Ec^-'})
-
-
-%%
-clc
-
-model_plot = @(R, Bias_current, Eps) charge_calc(feloop, R, Bias_current, Eps);
-
-time = feloop.ref.time.p;
-Ref_V = feloop.ref.volt.p;
-Ref_E = feloop.ref.E.p;
-Ref_P = feloop.ref.P.p;
-
-
-figure
-hold on
-plot(time, Ref_P)
-
-
-% R = 1e11;
-% I_bias = -1e-10;
-% Eps = 195; %1201
-
-out = model_plot(R, I_bias, Eps);
-
-% figure
-plot(time, out)
-
-
-%%
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
