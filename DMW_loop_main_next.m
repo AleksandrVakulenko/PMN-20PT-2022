@@ -9,6 +9,7 @@ folder = "Output 2022_10_06/";
 % Sample.H = 85e-6; %m
 % Sample.S = 0.29/1000^2; %m^2
 % Sample.Gain = 20;
+
 % PZT
 Sample.H = 35e-6; %m
 Sample.S = 450e-6 * 280e-6; %m^2
